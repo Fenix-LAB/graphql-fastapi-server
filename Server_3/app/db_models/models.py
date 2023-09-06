@@ -23,7 +23,7 @@ class Users(Base): # Clase modelo de la tabla users de la base de datos que here
     # last_session = Column(Date) # last_session es la fecha de la ultima sesion del usuario
 
     # Es necesario definir un constructor para poder añadir datos a la base de datos
-    def __init__(self, name, last_name, password, token): # Constructor de la clase Users que recibe los parametros de la clase y los asigna a los atributos de la clase
+    def __init__(self, name, last_name, password): # Constructor de la clase Users que recibe los parametros de la clase y los asigna a los atributos de la clase
         self.name = name
         self.last_name = last_name
         self.password = password
