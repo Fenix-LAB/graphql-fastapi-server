@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
-from pydantic.typing import Optional
+# from pydantic.typing import Optional
+from typing import Optional
 from . import Base, User
 
 class StickyNotes(Base):

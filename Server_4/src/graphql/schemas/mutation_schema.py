@@ -1,9 +1,9 @@
 import strawberry
 
-from graphql.resolvers.stickynote_resolver import add_stickynotes, delete_stickynotes, update_stickynotes
-from graphql.resolvers.user_resolver import add_user, delete_user
-from graphql.fragments.stickynotes_fragments import AddStickyNotesResponse, DeleteStickyNotesResponse, UpdateStickyNotesResponse
-from graphql.fragments.user_fragments import AddUserResponse, DeleteUserResponse
+from src.graphql.resolvers.stickynote_resolver import add_stickynotes, delete_stickynotes, update_stickynotes
+from src.graphql.resolvers.user_resolver import add_user, delete_user
+from src.graphql.fragments.stickynotes_fragments import AddStickyNotesResponse, DeleteStickyNotesResponse, UpdateStickyNotesResponse
+from src.graphql.fragments.user_fragments import AddUserResponse, DeleteUserResponse
 
 
 @strawberry.type

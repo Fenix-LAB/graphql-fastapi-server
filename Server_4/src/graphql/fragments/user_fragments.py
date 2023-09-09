@@ -1,6 +1,6 @@
 import strawberry
 
-from graphql.scalars.user_scalar import AddUser, UserDeleted, UserExists, UserIdMissing, UserNotFound
+from src.graphql.scalars.user_scalar import AddUser, UserDeleted, UserExists, UserIdMissing, UserNotFound
 
 
 AddUserResponse = strawberry.union("AddUserResponse", (AddUser, UserExists))

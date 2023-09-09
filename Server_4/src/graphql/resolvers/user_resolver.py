@@ -1,10 +1,10 @@
 from sqlalchemy import delete, insert, select
 from sqlalchemy.orm import subqueryload,load_only
 
-from graphql.db.session import get_session
-from graphql.helpers.helper import get_only_selected_fields, get_valid_data
-from graphql.models import user_model
-from graphql.scalars.user_scalar import AddUser, User, UserDeleted, UserExists, UserNotFound
+from src.graphql.db.session import get_session
+from src.graphql.helpers.helper import get_only_selected_fields, get_valid_data
+from src.graphql.models import user_model
+from src.graphql.scalars.user_scalar import AddUser, User, UserDeleted, UserExists, UserNotFound
 
 async def get_users(info):
     """ Get all users resolver """
@@ -36,20 +36,28 @@ async def get_user(user_id, info):
 
 async def add_user(name):
     """ Add user resolver """
+    print(name)
     async with get_session() as s:
-        sql = select(user_model.User).options(load_only('name')) \
-            .filter(user_model.User.name == name)
-        existing_db_user = (await s.execute(sql)).first()
-        if existing_db_user is not None:
-            return UserExists()
-
+        print('get session ok')
+        # sql = select(user_model.User).options(load_only('name')) \
+        #     .filter(user_model.User.name == name)
+        # existing_db_user = (await s.execute(sql)).first()
+        # if existing_db_user is not None:
+        #     return UserExists()
+        print('Se puede crear el usuario')
         query = insert(user_model.User).values(name=name)
+        print(f'query_sql: {query}')
         await s.execute(query)
         
-        sql = select(user_model.User).options(load_only('name')).filter(user_model.User.name == name)
-        db_user = (await s.execute(sql)).scalars().unique().one()
-        await s.commit()
 
+        print('Se ejecuto el query')
+        # sql = select(user_model.User).options(load_only('name')).filter(user_model.User.name == name)
+        sql = select(user_model.User).where(user_model.User.name == name)
+        db_user = (await s.execute(sql)).scalars().unique().one()
+        # db_user = s.query(user_model.User).filter(user_model.User.name == name).first()
+        print(f'Se creo el usuario {db_user}')
+        # await s.commit()
+        await s.commit()
     db_user_serialize_data = db_user.as_dict()
     return AddUser(**db_user_serialize_data)
 
