@@ -12,7 +12,9 @@ async def get_users(info):
     selected_fields = get_only_selected_fields(user_model.User,info)
     print(f'selected_fields: {selected_fields}')
     async with get_session() as s:
-        sql = select(user_model.User).options(Load(*selected_fields)).options(subqueryload(user_model.User.stickynotes)) \
+        # sql = select(user_model.User).options(load_only(user_model.User.name, user_model.User.id)).options(subqueryload(user_model.User.stickynotes)) \
+        # .order_by(user_model.User.name)
+        sql = select(user_model.User).options(subqueryload(user_model.User.stickynotes)) \
         .order_by(user_model.User.name)
         print(f'sql query: {sql}')
         db_users = (await s.execute(sql)).scalars().unique().all()
@@ -34,8 +36,10 @@ async def get_user(user_id, info):
     async with get_session() as s:
         # sql = select(user_model.User).options(load_only(*selected_fields)).options(subqueryload(user_model.User.stickynotes)) \
         # .filter(user_model.User.id == user_id).order_by(user_model.User.name)
-
-        sql = select(user_model.User).options(load_only(user_model.User.name, user_model.User.id)).options(subqueryload(user_model.User.stickynotes)) \
+        print(f'selected_fields: {selected_fields[0]}')
+        # sql = select(user_model.User).options(load_only(user_model.User.name)).options(subqueryload(user_model.User.stickynotes)) \
+        # .filter(user_model.User.id == user_id).order_by(user_model.User.name)
+        sql = select(user_model.User).options(subqueryload(user_model.User.stickynotes)) \
         .filter(user_model.User.id == user_id).order_by(user_model.User.name)
         print(f'consulta sql: {sql}')
 
@@ -63,9 +67,9 @@ async def add_user(name):
     print(name)
     async with get_session() as s:
         print('get session ok')
-        # sql = select(user_model.User).options(selectinload(user_model.User.name)) \
-        #     .filter(user_model.User.name == name)
-        sql = select(user_model.User.name).filter(user_model.User.name == name)
+        sql = select(user_model.User).options(load_only(user_model.User.name)) \
+            .filter(user_model.User.name == name)
+        # sql = select(user_model.User.name).filter(user_model.User.name == name)
         print(f'query_sql: {sql}')
         existing_db_user = (await s.execute(sql)).first()
         if existing_db_user is not None:
