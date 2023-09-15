@@ -7,3 +7,4 @@ I use fastapi to create the server and strawberry-graphql to create the schema a
 ```bash
 pip install -r requirements.txt
 ```
+
