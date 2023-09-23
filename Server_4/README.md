@@ -1,20 +1,57 @@
 # Full Api GraphQL
 
-mutation MyM {
-  __typename
-  addUser(name: "Javi"){
-    ...on AddUser {
-			id
-      name
-}
-		...on UserExists {
-			message
-	}
-}
-	addStickynotes(text: "demo text", userId: 1) {
-		...on StickyNotes {
-			id 
-      text
-  }
-}
-}
+```bash
+app/
+│
+├── src/
+│   │
+│   ├── graphql/
+│   │   │
+│   │   ├── core/
+│   │   │  └── config.py
+│   │   │
+│   │   ├── db/
+│   │   │  └── session.py
+│   │   │
+│   │   ├── schemas/
+│   │   │  ├── query_schema.py
+│   │   │  ├── mutation_schema.py
+│   │   │  └── subscription_schema.py
+│   │   │
+│   │   ├── models/
+│   │   │  ├── x_model.py
+│   │   │  ├── y_model.py
+│   │   │  └── ...
+│   │   │
+│   │   ├── resolvers/
+│   │   │  ├── x_resolver.py
+│   │   │  ├── y_resolver.py
+│   │   │  └── ...
+│   │   │
+│   │   ├── scalars/
+│   │   │  ├── x_scalar.py
+│   │   │  ├── y_scalar.py
+│   │   │  └── ...
+│   │   │
+│   │   ├── fragments/
+│   │   │  ├── x_fragment.py
+│   │   │  ├── y_fragment.py
+│   │   │  └── ...
+│   │   │
+│   │   └── helpers/
+│   │      └── helper.py
+│   │   
+│   │
+│   ├── rest/
+│       │
+│       ├── utils/
+│       │  ├── utils.py
+│       │  └── ...
+│       │
+│       ├── server.py
+│       
+│
+├── main.py
+│
+├── README.md
+```
