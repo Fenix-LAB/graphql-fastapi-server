@@ -1,6 +1,8 @@
 # Full Api GraphQL
 
+actualmente se esta trabajando en la implementacion de un servidor GraphQL con FastAPI
 ```bash
+
 app/
 │
 ├── src/
