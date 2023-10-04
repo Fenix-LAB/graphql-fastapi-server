@@ -18,7 +18,8 @@ async def get_users(info):
         .order_by(user_model.User.name)
         print(f'sql query: {sql}')
         db_users = (await s.execute(sql)).scalars().unique().all()
-
+        
+    # Crear una lista de expresiones de columna para seleccionar
     users_data_list = []
     for user in db_users:
         user_dict = get_valid_data(user,user_model.User)
@@ -102,5 +103,5 @@ async def delete_user(user_id):
         query = delete(user_model.User).where(user_model.User.id == user_id)
         await s.execute(query)
         await s.commit()
-    
+
     return UserDeleted()
