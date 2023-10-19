@@ -7,6 +7,8 @@ strawberry-graphql[fastapi]
 sqlalchemy
 asyncpg
 
+aaahhh necesito subir un update para que github me deje subir el proyecto
+
 ```bash
 
 app/
