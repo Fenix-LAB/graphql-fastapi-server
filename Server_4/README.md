@@ -8,6 +8,7 @@ sqlalchemy
 asyncpg
 
 aaahhh necesito subir un update para que github me deje subir el proyecto
+otra ves necesito subir un update para que github me deje subir el proyecto
 
 ```bash
 
