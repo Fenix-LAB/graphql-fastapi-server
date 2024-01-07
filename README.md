@@ -8,3 +8,9 @@ I use fastapi to create the server and strawberry-graphql to create the schema a
 pip install -r requirements.txt
 ```
 
+## Usage
+
+```bash
+uvicorn main:app --reload
+```
+
